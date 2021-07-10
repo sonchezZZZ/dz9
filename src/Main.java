@@ -7,14 +7,16 @@ public class Main {
     public static void main(String[] args) {
         List<String> arrayList = new ArrayList<>();
         List<String> ff = new LinkedList<>();
+        StringLinkedListImpl impl = new StringLinkedListImpl();
+        impl.addFirst("first");
+        impl.addFirst("new first");
 
     }
 
     public static List<String> filterList(List<String> list) {
-        boolean check;
         List<String> resultList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            check = list.get(i).matches("(.{1,4})([^0-9])");
+            boolean check = list.get(i).matches("(.{1,4})([^0-9])");
             if (check) {
                 resultList.add(list.get(i));
             }

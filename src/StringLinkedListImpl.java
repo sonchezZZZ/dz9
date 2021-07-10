@@ -10,16 +10,20 @@ public class StringLinkedListImpl implements StringLinkedList {
     public void addFirst(String s) {
         size++;
         if (first == null) {
+            first = new Node();
             first.setPrevious(null);
+            last = first;
             first.setNext(head);
-            head = first;
+
         } else {
             Node stock = first;
             first = new Node();
             first.setNext(stock);
+            first.setPrevious(null);
             stock.setPrevious(first);
         }
         first.setValue(s);
+        first.setIndex(0);
 
     }
 
@@ -47,12 +51,13 @@ public class StringLinkedListImpl implements StringLinkedList {
     public void addLast(String s) {
         size++;
         Node node = last;
-        last = new Node();
         node.setPrevious(last.getPrevious());
-        last.setPrevious(node);
         node.setNext(last);
-        node.setValue(s);
+        node.setValue(last.getValue());
+        last = new Node();
+        last.setPrevious(node);
         last.setNext(null);
+        last.setValue(s);
     }
 
     @Override
@@ -113,11 +118,20 @@ public class StringLinkedListImpl implements StringLinkedList {
 
     @Override
     public String removeLast() {
-        if (last.getValue() != null) {
-            Node node = last.getPrevious();
-            last = node;
-            last.setNext(null);
-            size--;
+        if (last != null) {
+            if(last != first){
+                Node node = last.getPrevious();
+                last = node;
+                last.setNext(null);
+                size--;
+            }
+            else{
+                size = 0;
+                removeFirst();
+                last = null;
+
+            }
+
         }
         return last.getValue();
     }
