@@ -127,13 +127,11 @@ public class StringLinkedListImpl implements StringLinkedList {
             }
             else{
                 size = 0;
-                removeFirst();
                 last = null;
-
+                removeFirst();
             }
-
         }
-        return last.getValue();
+        return "removed Last";
     }
 
     @Override
